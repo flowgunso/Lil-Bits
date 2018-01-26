@@ -31,7 +31,7 @@ fi
 
 # VM to be created path validation.
 echo "Checking if the VM to be created path exist."
-if  [ ! -d $vm_root_path ]
+if  [ ! -d $vm_path ]
 then
   echo "Creating the VM to be created path."
   mkdir $vm_path
