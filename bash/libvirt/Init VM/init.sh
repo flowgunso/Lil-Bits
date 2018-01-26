@@ -14,7 +14,8 @@ then
 fi
 
 # Variable initializations.
-vm_root_path="~/vm/"
+home_path=$HOME
+vm_root_path="$home_path/vm"
 vm_name="$1"
 vm_filename="$vm_name.qcow2"
 vm_path="$vm_root_path/$vm_name"
