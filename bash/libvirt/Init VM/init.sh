@@ -21,6 +21,12 @@ vm_filename="$vm_name.qcow2"
 vm_path="$vm_root_path/$vm_name"
 vm_full_path="$vm_path/$vm_filename"
 
+# Cleanup if this script was already called.
+echo "If any, cleaning existing $vm_name VM related data."
+virsh --connect qemu:///system destroy $vm_name
+virsh --connect qemu:///system undefine $vm_name
+rm -rf "$vm_path"
+
 # VM root path validation.
 echo "Checking if the VM root path exist."
 if  [ ! -d $vm_root_path ]
@@ -36,12 +42,6 @@ then
   echo "Creating the VM to be created path."
   mkdir $vm_path
 fi
-
-# Cleanup if this script was already called.
-echo "If any, cleaning existing $vm_name VM related data."
-pkill -f "qemu-kvm.*$vm_name"
-virsh --connect qemu:///system undefine $vm_name
-rm -f "$vm_full_path"
 
 echo "- Create the YUNOHost VM"
 qemu-img create -f qcow2 $vm_full_path 3T
